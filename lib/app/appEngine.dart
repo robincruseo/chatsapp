@@ -1,5 +1,5 @@
 //part of 'app.dart';
-//
+
 //class CodeWheeler {
 //  final int milliseconds;
 //  VoidCallback action;
@@ -22,6 +22,15 @@
 //  }
 //}
 //
+
+//import '../app_config.dart';
+//
+//import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
+import '../app_config.dart';
+
 ////List<Countries> getCountries() {
 ////  return countryMap
 ////      .map((c) => Countries(
@@ -47,25 +56,24 @@
 //  return three ? "$hs:$ms:$ss" : "$ms:$ss";
 //}
 //
-//textStyle(bool bold, double size, color,
-//    {underlined = false,
-//    //String font = "Lato",
-//    bool padd = true,
-//    decorationColor = AppConfig.appColor}) {
-//  return TextStyle(
-//      color: color,
-//      //fontWeight: bold ? FontWeight.w900 : FontWeight.normal,
-//      //fontFamily: font,
-//        fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-//      // fontWeight:bold?FontWeight.bold: null,//FontWeight.normal,
-//      fontFamily: bold ? "AvertaB" : "Averta",
-//
-//      fontSize: size,
-//      decorationColor: decorationColor,
-//      decorationThickness: 1,
-//      //decorationStyle: TextDecorationStyle.solid,
-//      decoration: underlined ? TextDecoration.underline : TextDecoration.none);
-//}
+textStyle(bool bold, double size, color,
+    {underlined = false,
+    //String font = "Lato",
+    bool padd = true,
+    decorationColor = AppConfig.appColor}) {
+  return TextStyle(
+      color: color,
+      //fontWeight: bold ? FontWeight.w900 : FontWeight.normal,
+      //fontFamily: font,
+      fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+      // fontWeight:bold?FontWeight.bold: null,//FontWeight.normal,
+      fontFamily: bold ? "AvertaB" : "Averta",
+      fontSize: size,
+      decorationColor: decorationColor,
+      decorationThickness: 1,
+      //decorationStyle: TextDecorationStyle.solid,
+      decoration: underlined ? TextDecoration.underline : TextDecoration.none);
+}
 //
 //pushAndResult(context, item, {result}) {
 //  Navigator.push(

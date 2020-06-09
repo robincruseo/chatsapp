@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Stories extends StatefulWidget {
+class Camera extends StatefulWidget {
   @override
-  _StoriesState createState() => _StoriesState();
+  _CameraState createState() => _CameraState();
 }
 
-class _StoriesState extends State<Stories> {
+class _CameraState extends State<Camera> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();

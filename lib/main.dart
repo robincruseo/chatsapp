@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'myHomePage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChatsApp());
 }
 
-class MyApp extends StatelessWidget {
+class ChatsApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
     );
   }
 }

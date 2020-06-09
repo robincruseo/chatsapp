@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppConfig {
-  static const String appName = "هُتاف";
+  static const String appName = "ChatsApp";
   static const String appIcon = "assets/images/ic_launcher.png";
   static const String appFont = "";
   static const int appVersion = 0;
