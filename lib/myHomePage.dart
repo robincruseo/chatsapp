@@ -5,9 +5,11 @@ import 'package:chatsapp/screens/camera.dart' as first;
 import 'package:chatsapp/screens/chat.dart' as second;
 import 'package:chatsapp/screens/stories.dart' as third;
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 import 'app/app.dart';
-import 'app/appEngine.dart';
+import 'models/chatModel.dart';
+//import 'app/appEngine.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -17,11 +19,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController tabController;
-
+  int tabPosition;
   @override
   void initState() {
     tabController = TabController(length: 4, vsync: this);
+    tabController.addListener(setActiveTabPosition);
+
     super.initState();
+  }
+
+  void setActiveTabPosition() {
+    tabPosition = tabController.index;
   }
 
   @override
@@ -32,64 +40,70 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 
-  myAppBar() => AppBar(
-        backgroundColor: AppConfig.appColor,
-        title: Text(
-          "ChatsApp",
-          style: textStyle(true, 25, white),
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.search,
-                size: 25,
+  myAppBar() {
+    return AppBar(
+      backgroundColor: AppConfig.appColor,
+      title: Text(
+        "ChatsApp",
+        style:
+            TextStyle(color: white, fontSize: 25, fontWeight: FontWeight.bold),
+      ),
+      actions: [
+        IconButton(
+            icon: Icon(
+              Icons.search,
+              size: 25,
+            ),
+            onPressed: () {}),
+        chatDialog(),
+      ],
+      bottom: PreferredSize(
+        preferredSize: new Size(50, 50),
+        child: TabBar(
+          tabs: [
+            Tab(
+                icon: Icon(
+              Icons.photo_camera,
+              color: Colors.white,
+              size: 25,
+            )),
+            Tab(
+              child: Text(
+                "CHATS",
+                style: TextStyle(
+                    color: white, fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              onPressed: () {}),
-          IconButton(
-              icon: Icon(
-                Icons.more_vert,
-                size: 25,
+            ),
+            Tab(
+              child: Text(
+                "STATUS",
+                style: TextStyle(
+                    color: white, fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              onPressed: () {}),
-        ],
-        bottom: PreferredSize(
-          preferredSize: new Size(50, 50),
-          child: TabBar(
-            tabs: [
-              Tab(
-                  icon: Icon(
-                Icons.photo_camera,
-                color: Colors.white,
-                size: 25,
-              )),
-              Tab(
-                child: Text(
-                  "CHATS",
-                  style: textStyle(true, 15, white),
-                ),
+            ),
+            Tab(
+              child: Text(
+                "CALLS",
+                style: TextStyle(
+                    color: white, fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              Tab(
-                child: Text(
-                  "STATUS",
-                  style: textStyle(true, 15, white),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  "CALLS",
-                  style: textStyle(true, 15, white),
-                ),
-              ),
-            ],
-            indicatorColor: Colors.white,
-            controller: tabController,
-            indicatorWeight: 4,
+            ),
+          ],
+          onTap: (p) {
+            setState(() {
+              tabPosition = p;
+            });
+          },
+          indicatorColor: Colors.white,
+          controller: tabController,
+          indicatorWeight: 4,
 //          indicatorSize: ,
-            unselectedLabelColor: AppConfig.appColor,
-            labelColor: AppConfig.appColor.withOpacity(.5),
-          ),
+          unselectedLabelColor: AppConfig.appColor,
+          labelColor: AppConfig.appColor.withOpacity(.5),
         ),
-      );
+      ),
+    );
+  }
 
   tabBody() => TabBarView(controller: tabController, children: <Widget>[
         first.Camera(),
@@ -97,4 +111,38 @@ class _MyHomePageState extends State<MyHomePage>
         third.Stories(),
         fourth.Call()
       ]);
+
+  chatDialog() {
+    return PopupMenuButton<String>(
+      padding: EdgeInsets.all(0),
+      elevation: 5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      onSelected: choiceAction,
+      icon: Icon(Icons.more_vert),
+      itemBuilder: (BuildContext context) {
+        List<String> popups = Constants.chatDiaglog;
+        if (tabPosition == 2) popups = Constants.statusSettings;
+        if (tabPosition == 3) popups = Constants.callSettings;
+
+        return popups.map((String chatDialog) {
+          return PopupMenuItem<String>(
+            value: chatDialog,
+            child: Text(chatDialog),
+          );
+        }).toList();
+      },
+    );
+  }
+
+  void choiceAction(String chatDialog) {
+    if (chatDialog == Constants.directMessage) {
+      print('Settings');
+    }
+    if (chatDialog == Constants.groupMessage) {
+      print('Subscribe');
+    }
+    if (chatDialog == Constants.Settings) {
+      print('SignOut');
+    }
+  }
 }

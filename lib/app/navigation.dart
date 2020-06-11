@@ -11,16 +11,16 @@ goToWidget(BuildContext context, Widget myWidget, {result}) async {
   });
 }
 
-//pushAndResult(BuildContext context, Widget myWidget, {result}) async {
-//  return await Navigator.of(context)
-//      .push(new MaterialPageRoute(builder: (context) {
-//    return myWidget;
-//  })).then((_) {
-//    if (_ != null) {
-//      if (result != null) result(_);
-//    }
-//  });
-//}
+pushAndResult(BuildContext context, Widget myWidget, {result}) async {
+  return await Navigator.of(context)
+      .push(new MaterialPageRoute(builder: (context) {
+    return myWidget;
+  })).then((_) {
+    if (_ != null) {
+      if (result != null) result(_);
+    }
+  });
+}
 
 goToWidgetAndDisposeCurrent(BuildContext context, Widget myWidget,
     {result}) async {

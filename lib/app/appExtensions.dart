@@ -57,25 +57,6 @@ double screenH(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-//extension Localization on String {
-//  //
-//  static var t = Translations("en_us") +
-//      {
-//        "en_us": "i18n Demo",
-//        "pt_br": "Demonstração i18n",
-//      };
-//
-//  String get i18n => localize(this, t);
-//
-//  String fill(List<Object> params) => localizeFill(this, params);
-//
-//  String plural(int value) => localizePlural(value, this, t);
-//
-//  String version(Object modifier) => localizeVersion(modifier, this, t);
-//
-//  Map<String, String> allVersions() => localizeAllVersions(this, t);
-//}
-
 extension Iterables<E> on Iterable<E> {
   Map<K, List<E>> groupBy<K>(K Function(E) keyFunction) => fold(
       <K, List<E>>{},
